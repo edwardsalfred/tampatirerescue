@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tampa Tire Rescue — Competitive Analysis Report</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" href="/assets/logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f6f4f0;
+  --paper-card: #fffefa;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --hairline: rgba(26, 26, 26, 0.08);
+  --terracotta: #c45d3e;
+  --amber: #d4972a;
+  --leaf: #5a7a4a;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.6;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.7;
+}
+main { max-width: 880px; margin: 0 auto; padding: 80px 56px 100px; position: relative; z-index: 1; }
+h1, h2, h3 { font-family: 'Instrument Serif', serif; font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; }
+h1 { font-size: 56px; margin: 0 0 12px; }
+h2 { font-size: 36px; margin: 64px 0 12px; }
+h3 { font-size: 24px; margin: 0 0 8px; }
+.eyebrow { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 18px; }
+.lead { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; line-height: 1.5; color: var(--ink-soft); margin: 0 0 0; max-width: 64ch; }
+.cover { padding: 32px 0 24px; border-bottom: 1px solid var(--hairline); }
+.cover-meta { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 28px; font-size: 13px; color: var(--ink-soft); }
+.cover-meta strong { color: var(--ink); font-weight: 600; }
+.badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; padding: 6px 14px; background: var(--terracotta); color: #fff; border-radius: 999px; margin-bottom: 22px; }
+.section { margin: 72px 0 0; }
+.flow-connector { display: flex; justify-content: center; margin: 28px 0; }
+.flow-connector svg { display: block; }
+.card { background: var(--paper-card); border-left: 4px solid var(--terracotta); padding: 28px 32px; border-radius: 4px; margin: 18px 0; box-shadow: 0 1px 0 var(--hairline); transition: box-shadow .25s; }
+.card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.card.amber { border-left-color: var(--amber); }
+.card.leaf { border-left-color: var(--leaf); }
+.card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.card h3 { margin: 0; }
+.score-pill { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; padding: 4px 12px; background: var(--paper); border: 1px solid var(--hairline); border-radius: 999px; }
+.swatches { display: flex; gap: 8px; margin: 12px 0 18px; }
+.swatch { width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--hairline); }
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.tag { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; padding: 4px 10px; background: var(--paper); border: 1px solid var(--hairline); border-radius: 999px; color: var(--ink-soft); }
+.tag.win { background: rgba(90,122,74,0.12); border-color: rgba(90,122,74,0.3); color: #3d5530; }
+.tag.gap { background: rgba(196,93,62,0.10); border-color: rgba(196,93,62,0.3); color: var(--terracotta); }
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13px; background: var(--paper-card); border-radius: 4px; overflow: hidden; }
+th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--hairline); }
+th { background: var(--paper); font-weight: 700; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+td.num { font-family: 'JetBrains Mono', monospace; text-align: right; }
+tr:last-child td { border-bottom: none; }
+tr.total { background: rgba(196,93,62,0.06); }
+tr.total td { font-weight: 700; }
+.phase-num { font-family: 'Instrument Serif', serif; font-size: 64px; line-height: 1; color: var(--hairline); display: inline-block; margin-bottom: 6px; }
+.pattern { display: flex; gap: 24px; margin: 18px 0; padding: 22px 26px; background: var(--paper-card); border-radius: 6px; border: 1px solid var(--hairline); }
+.pattern-num { font-family: 'Instrument Serif', serif; font-size: 36px; line-height: 1; color: var(--terracotta); flex-shrink: 0; }
+.pattern h4 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 22px; margin: 0 0 6px; }
+.pattern p { margin: 0; color: var(--ink-soft); }
+.exec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 24px 0; }
+.metric { padding: 22px 24px; background: var(--paper-card); border-radius: 6px; border: 1px solid var(--hairline); }
+.metric-num { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1; color: var(--terracotta); }
+.metric-label { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-top: 6px; }
+ul { padding-left: 20px; }
+li { margin: 6px 0; }
+.signoff { margin-top: 84px; padding-top: 32px; border-top: 1px solid var(--hairline); font-size: 12px; color: var(--ink-soft); text-align: center; letter-spacing: 0.08em; text-transform: uppercase; }
+.attribution { width: 100%; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--hairline); text-align: center; font-size: 12px; letter-spacing: 0.08em; }
+.attribution a { color: var(--terracotta); font-weight: 600; border-bottom: 1px solid var(--terracotta); text-decoration: none; }
+
+@media (max-width: 640px) {
+  main { padding: 48px 24px 64px; }
+  h1 { font-size: 40px; }
+  h2 { font-size: 28px; margin-top: 48px; }
+  .lead { font-size: 18px; }
+  .exec-grid { grid-template-columns: 1fr; }
+  table { font-size: 12px; display: block; overflow-x: auto; }
+  .pattern { flex-direction: column; gap: 8px; }
+}
+
+@media print {
+  body::before { display: none; }
+  body { background: #fff; }
+  main { padding: 24px 32px; max-width: 100%; }
+  .card, .pattern, .metric, table { page-break-inside: avoid; }
+  h2 { page-break-after: avoid; }
+  @page { size: A4; margin: 18mm; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<header class="cover">
+  <div class="badge">Competitive Analysis</div>
+  <h1>Owning the Tampa<br>roadside-rescue niche</h1>
+  <p class="lead">A field study of every mobile tire competitor in Tampa Bay — what they do, what they miss, and the seven moves that separate the leaders from the templates.</p>
+  <div class="cover-meta">
+    <div><strong>Prepared for</strong><br>Tampa Tire Rescue</div>
+    <div><strong>Date</strong><br>May 2026</div>
+    <div><strong>Sites reviewed</strong><br>5 in market</div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="eyebrow">Executive summary</div>
+  <h2>Tampa Tire Rescue ranks first on Google. The website doesn't reflect it.</h2>
+  <p>Across five Tampa Bay mobile tire competitors, Tampa Tire Rescue holds the strongest organic search position but the weakest visual presentation. Every competitor uses a stock website builder, none use scroll animation, and only one publishes pricing. The opportunity is not to outspend them on ads. It is to build the only site in the city that looks like the leader actually leads.</p>
+
+  <div class="exec-grid">
+    <div class="metric"><div class="metric-num">5/5</div><div class="metric-label">Competitors using template builders</div></div>
+    <div class="metric"><div class="metric-num">2/5</div><div class="metric-label">Sites that publish any pricing</div></div>
+    <div class="metric"><div class="metric-num">1/5</div><div class="metric-label">Sites making a specific time promise</div></div>
+    <div class="metric"><div class="metric-num">0/5</div><div class="metric-label">Sites using scroll-triggered animation</div></div>
+  </div>
+</section>
+
+<div class="flow-connector"><svg width="2" height="60"><line x1="1" y1="0" x2="1" y2="60" stroke="#c45d3e" stroke-dasharray="4 4" stroke-width="1"/></svg></div>
+
+<section class="section">
+  <span class="phase-num">01</span>
+  <div class="eyebrow">Competitor profiles</div>
+  <h2>Five sites, scored across eight criteria.</h2>
+
+  <div class="card">
+    <div class="card-head"><h3>Tampa Tire Rescue</h3><span class="score-pill">47 / 80</span></div>
+    <div class="swatches" aria-hidden="true">
+      <span class="swatch" style="background:#0B0B0D"></span>
+      <span class="swatch" style="background:#FFC400"></span>
+      <span class="swatch" style="background:#E63946"></span>
+      <span class="swatch" style="background:#F4F1EC"></span>
+    </div>
+    <p><strong>Strength.</strong> Best Google visibility in Tampa. Strong direct-CTA hero. Specific 20-minute response promise. Comprehensive 17-service list.</p>
+    <p><strong>Gap.</strong> Single-page Hostinger build. One thin testimonial. No team or van photography. No schema markup. No per-city pages despite serving 14 cities.</p>
+    <div class="tag-row">
+      <span class="tag win">SEO leader</span>
+      <span class="tag win">17 services listed</span>
+      <span class="tag gap">Template build</span>
+      <span class="tag gap">No social proof</span>
+    </div>
+  </div>
+
+  <div class="card amber">
+    <div class="card-head"><h3>Tampa Mobile Tire Shop (Mobile Tire Guys)</h3><span class="score-pill">41 / 80</span></div>
+    <div class="swatches" aria-hidden="true">
+      <span class="swatch" style="background:#181818"></span>
+      <span class="swatch" style="background:#e8b500"></span>
+      <span class="swatch" style="background:#ffffff"></span>
+    </div>
+    <p><strong>Strength.</strong> Aggressive 24/7 messaging. Strong dispatch-style CTA. Tampa-specific.</p>
+    <p><strong>Gap.</strong> Heavy template feel. Repetitive copy blocks. No testimonials, photos, or pricing.</p>
+    <div class="tag-row">
+      <span class="tag win">Strong CTA</span>
+      <span class="tag gap">No reviews</span>
+      <span class="tag gap">No imagery</span>
+    </div>
+  </div>
+
+  <div class="card amber">
+    <div class="card-head"><h3>Bay Breeze On The Go</h3><span class="score-pill">42 / 80</span></div>
+    <div class="swatches" aria-hidden="true">
+      <span class="swatch" style="background:#0a2240"></span>
+      <span class="swatch" style="background:#1d6bb8"></span>
+      <span class="swatch" style="background:#ffffff"></span>
+    </div>
+    <p><strong>Strength.</strong> Real multi-page architecture. Active social channels (FB, IG, LinkedIn). Some vehicle photography.</p>
+    <p><strong>Gap.</strong> Generic "First Class Services" headline. Carousel hero (dated pattern). No testimonials. Blue color is forgettable in a roadside category.</p>
+    <div class="tag-row">
+      <span class="tag win">Multi-page</span>
+      <span class="tag win">Social presence</span>
+      <span class="tag gap">Generic headline</span>
+      <span class="tag gap">Carousel hero</span>
+    </div>
+  </div>
+
+  <div class="card leaf">
+    <div class="card-head"><h3>LP Mobile Tire</h3><span class="score-pill">52 / 80</span></div>
+    <div class="swatches" aria-hidden="true">
+      <span class="swatch" style="background:#0c0c0c"></span>
+      <span class="swatch" style="background:#cc1f1f"></span>
+      <span class="swatch" style="background:#f4f4f4"></span>
+    </div>
+    <p><strong>Strength.</strong> Publishes pricing ($125 flat + $1.50/mile) — the only Tampa competitor doing this. "Two generations" trust angle. 10+ image gallery. FAQ section.</p>
+    <p><strong>Gap.</strong> Single-page anchor nav. No scroll animation. No team photos. No specific response-time claim.</p>
+    <div class="tag-row">
+      <span class="tag win">Pricing transparency</span>
+      <span class="tag win">FAQ block</span>
+      <span class="tag win">Image gallery</span>
+      <span class="tag gap">No animation</span>
+    </div>
+  </div>
+
+  <div class="card leaf">
+    <div class="card-head"><h3>Mobile Tire Co (Charleston, SC) — design reference</h3><span class="score-pill">55 / 80</span></div>
+    <div class="swatches" aria-hidden="true">
+      <span class="swatch" style="background:#0e1a2e"></span>
+      <span class="swatch" style="background:#f08316"></span>
+      <span class="swatch" style="background:#ffffff"></span>
+    </div>
+    <p><strong>Strength.</strong> Best-in-class for the genre. Real named testimonials. Six-step process diagram. Partial pricing transparency. Online booking. Modern responsive layout.</p>
+    <p><strong>Gap.</strong> Out-of-market. Generic service icons in place of authentic van or team photography. No scroll animation.</p>
+    <div class="tag-row">
+      <span class="tag win">Process diagram</span>
+      <span class="tag win">Named testimonials</span>
+      <span class="tag win">Online booking</span>
+    </div>
+  </div>
+</section>
+
+<div class="flow-connector"><svg width="2" height="60"><line x1="1" y1="0" x2="1" y2="60" stroke="#c45d3e" stroke-dasharray="4 4" stroke-width="1"/></svg></div>
+
+<section class="section">
+  <span class="phase-num">02</span>
+  <div class="eyebrow">Side-by-side scoring</div>
+  <h2>The data behind the rankings.</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Competitor</th>
+        <th class="num">SEO</th>
+        <th class="num">Reviews</th>
+        <th class="num">Design</th>
+        <th class="num">Mobile</th>
+        <th class="num">Content</th>
+        <th class="num">Proof</th>
+        <th class="num">CTA</th>
+        <th class="num">Speed</th>
+        <th class="num">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Tampa Tire Rescue (current)</td><td class="num">9</td><td class="num">6</td><td class="num">4</td><td class="num">6</td><td class="num">5</td><td class="num">3</td><td class="num">7</td><td class="num">7</td><td class="num">47</td></tr>
+      <tr><td>Tampa Mobile Tire Shop</td><td class="num">7</td><td class="num">5</td><td class="num">3</td><td class="num">5</td><td class="num">6</td><td class="num">2</td><td class="num">7</td><td class="num">6</td><td class="num">41</td></tr>
+      <tr><td>Bay Breeze On The Go</td><td class="num">7</td><td class="num">5</td><td class="num">5</td><td class="num">6</td><td class="num">4</td><td class="num">2</td><td class="num">7</td><td class="num">6</td><td class="num">42</td></tr>
+      <tr><td>LP Mobile Tire</td><td class="num">6</td><td class="num">6</td><td class="num">6</td><td class="num">7</td><td class="num">7</td><td class="num">5</td><td class="num">8</td><td class="num">7</td><td class="num">52</td></tr>
+      <tr><td>Mobile Tire Co (reference)</td><td class="num">5</td><td class="num">7</td><td class="num">7</td><td class="num">8</td><td class="num">7</td><td class="num">6</td><td class="num">8</td><td class="num">7</td><td class="num">55</td></tr>
+      <tr class="total"><td>Rebuild target</td><td class="num">10</td><td class="num">8</td><td class="num">9</td><td class="num">9</td><td class="num">9</td><td class="num">8</td><td class="num">9</td><td class="num">9</td><td class="num">71</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="flow-connector"><svg width="2" height="60"><line x1="1" y1="0" x2="1" y2="60" stroke="#c45d3e" stroke-dasharray="4 4" stroke-width="1"/></svg></div>
+
+<section class="section">
+  <span class="phase-num">03</span>
+  <div class="eyebrow">Patterns of the top 10%</div>
+  <h2>Six moves that separate leaders from templates.</h2>
+
+  <div class="pattern">
+    <span class="pattern-num">01</span>
+    <div>
+      <h4>The phone number lives everywhere.</h4>
+      <p>Top sites repeat it in nav, hero, footer, and a sticky mobile bar. Weak sites bury it in a contact form. The rebuild treats the dial-pad as the product.</p>
+    </div>
+  </div>
+
+  <div class="pattern">
+    <span class="pattern-num">02</span>
+    <div>
+      <h4>Pricing transparency is a moat.</h4>
+      <p>Only one competitor publishes rates. That single decision is their strongest trust signal. Publishing baseline pricing on the rebuild's Services page captures the same trust on day one.</p>
+    </div>
+  </div>
+
+  <div class="pattern">
+    <span class="pattern-num">03</span>
+    <div>
+      <h4>Real testimonials beat fake stars.</h4>
+      <p>Named first-name reviews with specific scenarios outperform generic five-star icons. The current site has one quote. The rebuild ships with four to six.</p>
+    </div>
+  </div>
+
+  <div class="pattern">
+    <span class="pattern-num">04</span>
+    <div>
+      <h4>A specific time promise wins.</h4>
+      <p>Tampa Tire Rescue already claims a 20-minute response. Every other competitor says "fast." The rebuild promotes that number to a dominant headline.</p>
+    </div>
+  </div>
+
+  <div class="pattern">
+    <span class="pattern-num">05</span>
+    <div>
+      <h4>Per-city content is SEO gold.</h4>
+      <p>Fourteen cities served means fourteen long-tail keywords. The rebuild creates indexable per-city anchor sections (and optional per-city pages) every competitor lacks.</p>
+    </div>
+  </div>
+
+  <div class="pattern">
+    <span class="pattern-num">06</span>
+    <div>
+      <h4>None of them have ambition with design.</h4>
+      <p>Every Tampa-market site is a template. A scroll-animated, custom-typed, image-rich build immediately reads as the legitimate option in the city — before the visitor reads a word.</p>
+    </div>
+  </div>
+</section>
+
+<div class="flow-connector"><svg width="2" height="60"><line x1="1" y1="0" x2="1" y2="60" stroke="#c45d3e" stroke-dasharray="4 4" stroke-width="1"/></svg></div>
+
+<section class="section">
+  <span class="phase-num">04</span>
+  <div class="eyebrow">SEO landscape</div>
+  <h2>Where the keyword opportunity sits.</h2>
+  <p><strong>Owned by competitors:</strong> "mobile tire repair Tampa," "24/7 tire repair Tampa," "roadside assistance Tampa," "flat tire fix Tampa."</p>
+  <p><strong>Unclaimed long-tail (rebuild targets):</strong></p>
+  <ul>
+    <li>"mobile tire repair Brandon FL," "Riverview," "Wesley Chapel," "Clearwater," "Largo," "Pinellas Park," "Dunedin," "Safety Harbor," "Oldsmar," "Seminole," "Temple Terrace," "Palm Harbor," "St Petersburg"</li>
+    <li>"semi truck tire repair Tampa"</li>
+    <li>"used tires installed Tampa"</li>
+    <li>"24 hour tire shop near me"</li>
+    <li>"rim repair Tampa"</li>
+    <li>"emergency jump start Tampa"</li>
+  </ul>
+  <p><strong>Technical gaps closed in the rebuild:</strong> multi-page architecture, full <code>LocalBusiness</code> + <code>Service</code> + <code>FAQPage</code> schema, descriptive image filenames, sitemap.xml, robots.txt, Open Graph tags.</p>
+</section>
+
+<div class="flow-connector"><svg width="2" height="60"><line x1="1" y1="0" x2="1" y2="60" stroke="#c45d3e" stroke-dasharray="4 4" stroke-width="1"/></svg></div>
+
+<section class="section">
+  <span class="phase-num">05</span>
+  <div class="eyebrow">Recommended direction</div>
+  <h2>The design system, justified by the data.</h2>
+
+  <div class="card">
+    <h3>Palette</h3>
+    <p>Asphalt black <code>#0B0B0D</code>, hazard amber <code>#FFC400</code>, rescue red <code>#E63946</code>. Roadside-rescue signal language. Distinct from every competitor's blue or template-default scheme.</p>
+    <div class="swatches" aria-hidden="true">
+      <span class="swatch" style="background:#0B0B0D"></span>
+      <span class="swatch" style="background:#FFC400"></span>
+      <span class="swatch" style="background:#E63946"></span>
+      <span class="swatch" style="background:#F4F1EC"></span>
+      <span class="swatch" style="background:#1B1D22"></span>
+    </div>
+  </div>
+
+  <div class="card amber">
+    <h3>Typography</h3>
+    <p>Bangers (display, all-caps italic) for hero and section headlines — mirrors the existing wordmark and is louder than any competitor type. Inter (400/500/700) for body. JetBrains Mono for phone numbers and the response-time stat block.</p>
+  </div>
+
+  <div class="card amber">
+    <h3>Animation</h3>
+    <p>GSAP + ScrollTrigger throughout. Pinned hero with a marked placeholder for a 3D scroll-stop video asset (to be generated separately). Reveal-on-scroll for service cards, parallax on imagery, dial-pulse on the sticky phone bar.</p>
+  </div>
+
+  <div class="card leaf">
+    <h3>Content moves not seen anywhere in market</h3>
+    <ul>
+      <li>Headline-scale "20 min" response-time number, animated count-up from 0.</li>
+      <li>Live "Now Open" status indicator (pulse dot).</li>
+      <li>Map-driven service-area visualization with the 14 cities tagged.</li>
+      <li>Six-step "How it works" diagram (call → dispatch → arrive → diagnose → repair/replace → drive away).</li>
+      <li>Pricing transparency block — flat baseline + add-ons.</li>
+      <li>FAQ block with schema markup.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="signoff">
+  Tampa Tire Rescue · Competitive Analysis · Confidential
+  <div class="attribution">
+    Created by <a href="https://www.chatbotboy.ai/" target="_blank" rel="noopener">Chatbot Boy AI</a>
+  </div>
+</div>
+
+</main>
+</body>
+</html>

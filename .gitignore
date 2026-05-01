@@ -1,0 +1,28 @@
+.DS_Store
+Thumbs.db
+*.log
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+
+# Claude Code local state
+.claude/settings.local.json
+
+# Playwright artifacts
+.playwright-mcp/
+*.png
+*.jpeg
+
+# Keep design assets
+!site/assets/**/*.png
+!site/assets/**/*.jpg
+!site/assets/**/*.jpeg
+!site/assets/**/*.svg
+
+# Node (in case anyone adds tooling later)
+node_modules/
+dist/
+.env
+.env.local
